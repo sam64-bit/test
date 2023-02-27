@@ -21,8 +21,3 @@ public class Test {
 	}
 
 }
-
-Lat entry 
-Date : 20-02-2023
-Lab Monday 
-18,33,
