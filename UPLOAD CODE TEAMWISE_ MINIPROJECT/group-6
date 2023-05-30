@@ -1,0 +1,207 @@
+DATABASE CREATION:-///**
+
+Create database test;
+use test;
+CREATE TABLE student (
+   `id` int(3) primary key,
+   `first_name` varchar(20), 
+   `last_name` varchar(20),
+   `username` varchar(250),
+   `password` varchar(20),
+   `address` varchar(45),
+   `contact` varchar(45),
+	CGPA DOUBLE,
+	College_name varchar(20));
+
+
+INDEX.JSP:-///**
+
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+ pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+ <div align="center">
+  <h1>Employee Register Form</h1>
+  <form action="register" method="post">
+   <table style="with: 80%">
+    <tr>
+     <td>First Name</td>
+     <td><input type="text" name="firstName" /></td>
+    </tr>
+    <tr>
+     <td>Last Name</td>
+     <td><input type="text" name="lastName" /></td>
+    </tr>
+    <tr>
+     <td>UserName</td>
+     <td><input type="text" name="username" /></td>
+    </tr>
+    <tr>
+     <td>Password</td>
+     <td><input type="password" name="password" /></td>
+    </tr>
+    <tr>
+     <td>Address</td>
+     <td><input type="text" name="address" /></td>
+    </tr>
+    <tr>
+     <td>Contact No</td>
+     <td><input type="text" name="contact" /></td>
+    </tr>
+	<td>CGPA</td>
+     <td><input type="CGPA" name="CGPA" /></td>
+    </tr>
+	<td>College_name</td>
+     <td><input type="text" name="Name" /></td>
+    </tr>
+   </table>
+   <input type="submit" value="Submit" />
+  </form>
+ </div>
+</body>
+</html>
+
+studentservlet.java:-////**
+
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.sql.*;
+
+
+
+@WebServlet("/register")
+public class EmployeeServlet extends HttpServlet {
+    private static final long serialVersionUID = 1 L;
+    private EmployeeDao employeeDao;
+
+    public void init() {
+        employeeDao = new EmployeeDao();
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+	  Class.forName("com.mysql.jdbc.Driver");
+
+        try {
+	Connection connection = DriverManager
+            .getConnection("jdbc:mysql://localhost:3306/employees?useSSL=false", "root", "root");
+	 String INSERT_USERS_SQL = "INSERT INTO employee" +
+            "  (id, first_name, last_name, username, password, address, contact,CGPA,College_name) VALUES " +
+            " (?, ?, ?, ?, ?,?,?,?,?);";
+ PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
+            preparedStatement.setInt(1, 1);
+            preparedStatement.setString(2, employee.getFirstName());
+            preparedStatement.setString(3, employee.getLastName());
+            preparedStatement.setString(4, employee.getUsername());
+            preparedStatement.setString(5, employee.getPassword());
+            preparedStatement.setString(6, employee.getAddress());
+            preparedStatement.setString(7, employee.getContact());
+	    preparedStatement.setString(8, employee.getCgpa());
+	    preparedStatement.setString(9, employee.getname());
+
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            result = preparedStatement.executeUpdate();
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String address = request.getParameter("address");
+        String CGPA = request.getParameter("CGPA");
+	String College_name = request.getParameter("College_name");
+	
+
+        Employee employee = new Employee();
+        employee.setFirstName(firstName);
+        employee.setLastName(lastName);
+        employee.setUsername(username);
+        employee.setPassword(password);
+        employee.setContact(contact);
+        employee.setAddress(address);
+	 employee.setcgpa(CGPA);
+	 employee.setname(College_name);
+
+        
+            
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        response.sendRedirect("employeedetails.jsp");
+    }
+}
+error.jsp:-//***
+
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+ pageEncoding="ISO-8859-1"%>
+<%@page import="java.sql.*"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+ <h1>Entered wrong details!</h1>
+</body>
+</html>
+
+show.jsp:-////***
+
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+     <%@page import="java.sql.*"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<a><b>Welcome User!!!!</b></a>
+<%
+try{
+Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/test","root","root123");
+Statement st = con.createStatement();
+ResultSet rs = st.executeQuery("select *from student");
+out.println("<html><head><title>employee</title></head>");
+out.println("<body bgcolor=orange><center>");
+out.println("<table border=2>");
+out.println("<tr><td>firstname</td><td>lastname</td><td>Username</td><td>Password</td><td>Address</td><td>contact</td><td>cgpa</td><td>collegename</td></tr>");
+while(rs.next())
+{
+	 out.println("<tr><td>"+rs.getString(1)+"</td>");
+	 out.println("<td>"+rs.getString(2)+"</td>");
+	 out.println("<td>"+rs.getString(3)+"</td></tr>");
+	 out.println("<td>"+rs.getString(4)+"</td></tr>");	
+	 out.println("<td>"+rs.getString(5)+"</td></tr>");
+	out.println("<td>"+rs.getString(6)+"</td></tr>");
+	out.println("<td>"+rs.getString(7)+"</td></tr>");
+	out.println("<td>"+rs.getString(8)+"</td></tr>");
+			 
+}
+out.println("</center></table></body></html>");
+}
+catch(Exception se)
+{
+   se.printStackTrace();
+} %>
+</body>
+</html>
+
+
+
+
