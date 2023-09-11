@@ -1,0 +1,63 @@
+//Set1 - Create a java program to divide two matrices
+//use Exception handlers ArithmeticException and
+//ArrayIndexOutOfBoundsException 
+//use try catch
+//88,142,123,145,173,109,82,102,125,169,76,106
+//78,141,144,137,167,70,180,0002
+//set2 create an Array 
+//search an element whether present or not in that array
+//if not present 
+// handle it by showing an exception 
+//"elementNotFoundException
+// use try catch
+//use checked exception handler
+//79,159,158,99,95,122,108,161,87,118,130,120,172,129,
+//189,176
+//idnumber    name      marks(8)
+// 142        avinash   8
+// 173        dhruti    8   
+// 122        deepti    8
+// 87         pavan     7.5
+// 130        karthik   7.5
+// 99         kavya     8
+// 95         anu       8
+// 109        saniya    8
+// 125		  Gauravh   8
+// 141        zeeshan   8
+// 119        vaibhav   8
+// 76         hira      8
+// 158        hitha     8
+// 0002       venessa   8
+//145                   7
+//118                   8
+//88                    7
+//102                   7
+//137                   7
+//167                   7
+//120                   5
+//144                   5
+//78                    5
+//169                   5
+//161                   5
+//106                   5
+//108                   5
+//79                    6
+//129                   5
+//123                   5
+//82                    5
+//180                   3
+//0070                  3
+//172                   2
+//159                   2
+//189                   1
+//176                   0.5
+remaining 0
+
+public class SlipTestSet1 {
+
+	public static void main(String[] args){
+		// TODO Auto-generated method stub
+
+	}
+
+}
