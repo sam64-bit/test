@@ -1,0 +1,43 @@
+//create a single thread to print factorial of a number
+import java.lang.Thread;
+class Factorialthread extends Thread {
+	String name;
+	int number;
+	long result;
+	public Factorialthread(String name, int number ) {
+		this.name = name;
+		this.number = number;
+		System.out.println(name+" thread created");
+	}
+	public void run() {
+		try {
+			result=1;
+			for(int i=1;i<=number;i++) {
+				result=result*i;
+				Thread.sleep(2000);
+			}
+			
+		}catch(Exception e) {}
+		System.out.println("factorial is "+result);
+		System.out.println(name+" thread ended");
+	}
+	
+	
+}
+public class Test12 {
+	public static void main(String[] args)throws Exception {
+		System.out.println("main thread started");
+       Factorialthread ob=new Factorialthread("thread1",5);
+       ob.start();
+       ob.join();
+       System.out.println("main thread ended");
+	}
+
+}
+
+
+
+
+
+
+
