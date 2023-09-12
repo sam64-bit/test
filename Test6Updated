@@ -39,7 +39,7 @@ public class Test6 {
      if(ch==1) {
     	 s=new circle();
     	 s.area();
-    	 c.printDiameter()
+    	 c.printDiameter();
      }else {
     	 s=new Triangle();
     	 s.area();
