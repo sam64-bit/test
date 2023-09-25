@@ -1,0 +1,50 @@
+//create three threads to print factorial of 3 different numbers
+import java.lang.Thread;
+class Factorialthread extends Thread {
+	String name;
+	int number;
+	long result;
+	public Factorialthread(String name, int number ) {
+		this.name = name;
+		this.number = number;
+		System.out.println(name+" thread created");
+	}
+	public void run() {
+		try {
+			result=1;
+			for(int i=1;i<=number;i++) {
+				result=result*i;
+		System.out.println(name+" is calculating factorial "+i+" "+result);
+				Thread.sleep(1000);
+			}
+			
+		}catch(Exception e) {}
+		System.out.println("calculated factorial is "+result);
+		System.out.println(name+" thread ended");
+	}
+	
+	
+}
+public class Test12 {
+	public static void main(String[] args)throws Exception {
+		System.out.println("main thread started");
+       Factorialthread ob=new Factorialthread("first",5);
+       Factorialthread ob2=new Factorialthread("second",6);
+       Factorialthread ob3=new Factorialthread("third",7);
+       ob.start();
+       ob2.start();
+       ob3.start();
+       ob.join();
+       ob2.join();
+       ob3.join();
+       System.out.println("main thread ended");
+	}
+
+}
+
+
+
+
+
+
+
