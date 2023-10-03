@@ -1,0 +1,34 @@
+//not synchronized
+class Resource {
+	public void use() {
+		System.out.print("[");
+		try {
+			Thread.sleep(2000);
+		}catch(Exception e) {}
+		System.out.print("]");
+	}
+}
+class user extends Thread {
+	Resource res;
+	String name;
+	user(String n,Resource r) {
+		name=n;
+		res=r;
+		System.out.println(name+" thread created");
+	}
+	public void run() {
+		res.use();
+	}
+}
+
+public class Test18 {
+	public static void main(String[] args)throws Exception {
+		Resource r=new Resource();
+		user u1=new user("amit",r);
+		user u2=new user("ankit",r);
+		user u3=new user("ajit",r);
+        u1.start();u2.start();u3.start();
+        u1.join();u2.join();u3.join();
+	}
+
+}
