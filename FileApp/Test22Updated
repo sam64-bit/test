@@ -1,0 +1,22 @@
+import java.io.*;
+public class Test22 {
+public void copy(String src,String target) throws Exception{
+	File f1=new File("C:\\anil\\"+src);
+	File f2=new File("C:\\anil\\"+target);
+	FileReader fr=new FileReader(f1);
+	FileWriter fw=new FileWriter(f2);
+	int i;
+	while((i=fr.read())!=-1) {
+		fw.write(i);
+	}
+	
+	fr.close();
+	fw.close();
+	System.out.println(" 1 file copied");
+}
+	public static void main(String[] args) throws Exception{
+      Test22 ob = new Test22();
+      ob.copy("presidency.txt","presidencycopy.txt");
+	}
+
+}
