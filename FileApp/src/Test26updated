@@ -1,0 +1,30 @@
+//write content/record to the binary file student.dat
+import java.io.*;
+import java.util.Scanner;
+public class Test26 {
+	public static void main(String[] args)throws Exception {
+		String record="";
+		String name;
+		int regdno;
+		String response;
+		byte[] arr;
+		char ch='y';
+		Scanner sc=new Scanner(System.in);
+		File file=new File("D:\\5csd3\\student.dat");
+		FileOutputStream fw=new FileOutputStream(file);
+		do {
+			System.out.println("Enter name id response");
+			name=sc.next();
+			regdno=sc.nextInt();
+			response=sc.next();
+		record.concat(name).concat(" ").concat(String.valueOf(regdno)).concat(" ").concat(response);
+		arr=record.getBytes();
+		fw.write(arr);
+		
+		System.out.print("Enter choice do u want to continue<y/n>");
+		ch=sc.next().charAt(0);
+		record="";
+		}while(ch!='n');
+	}
+
+}
