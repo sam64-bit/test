@@ -1,0 +1,88 @@
+import java.sql.*;
+class EntityFaculty {
+	private int fid;
+	private String name;
+	EntityFaculty(int fid,String name) {
+		this.fid=fid;
+		this.name=name;
+	}
+	public int getFid() {
+		return fid;
+	}
+	public void setFid(int fid) {
+		this.fid = fid;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+}
+class Datasource {
+	EntityFaculty ob;
+	Connection c;
+	PreparedStatement p;
+	Statement s;
+	ResultSet r;
+	Datasource()throws Exception {
+		Class.forName("com.mysql.jdbc.Driver");
+		c=DriverManager.getConnection(
+				"jdbc:mysql://localhost:3306/universitydb",
+				"root","sunil");
+		System.out.println("Connected");
+		s=c.createStatement();
+		String sql="create table faculty(id int primary key, name varchar(30))";
+		s.execute(sql);
+		
+	}
+	public void insert(EntityFaculty ob) throws Exception{
+		this.ob=ob;
+		String sql="insert into faculty values(?,?)";
+		p=c.prepareStatement(sql);
+		p.setInt(1, ob.getFid());
+		p.setString(2, ob.getName());
+		p.executeUpdate();
+		System.out.println("Record Inserted");
+		
+	}
+	public void delete(int id)throws Exception {
+		String sql="delete from faculty where id=?";
+		p=c.prepareStatement(sql);
+		p.setInt(1,id);
+		p.executeUpdate();
+		System.out.println("Record Deleted");
+	}
+	public void update(int id,String name)throws Exception {
+		String sql="update faculty set name=? where id=?";
+		p=c.prepareStatement(sql);
+		p.setInt(2, id);
+		p.setString(1, name);
+		p.executeUpdate();
+		System.out.println("Record Updated");
+	}
+	public void fetchRecord()throws Exception {
+		String sql="select * from faculty";
+		s=c.createStatement();
+		r=s.executeQuery(sql);
+		while(r.next()) {
+		    System.out.printf("%-4d",r.getInt(1));
+		    System.out.printf("%-6s",r.getString(2));
+		    System.out.println();
+		}
+	}
+
+}
+public class TestCA {
+	public static void main(String[] args) throws Exception{
+          EntityFaculty f1=new EntityFaculty(100,"sunil");
+          EntityFaculty f2=new EntityFaculty(101,"anil");
+          Datasource ds=new Datasource();
+          ds.insert(f1);ds.insert(f2);
+          ds.delete(100);
+          ds.update(101,"ajith");
+          ds.fetchRecord();
+	}
+
+}
